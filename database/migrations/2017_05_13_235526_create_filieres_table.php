@@ -15,7 +15,7 @@ class CreateFilieresTable extends Migration
     {
         Schema::create('filieres', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name');
         });
     }
 

@@ -18,7 +18,17 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('tags');
+            $table->unsignedInteger('niveau_id')->nullable();
+            $table->unsignedInteger('filiere_id')->nullable();
             $table->timestamps();
+        });
+
+        Schema::create('article_auteur', function (Blueprint $table) {
+            $table->unsignedInteger('article_id');
+            $table->unsignedInteger('auteur_id');
+            $table->primary(array('article_id','auteur_id'));
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->foreign('auteur_id')->references('id')->on('auteurs')->onDelete('cascade');
         });
     }
 
@@ -29,6 +39,7 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('article_auteur');
         Schema::dropIfExists('articles');
     }
 }
