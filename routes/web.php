@@ -12,9 +12,7 @@
 */
 
 Route::get('/', function () {
-    $articles = \App\Article::all();
-
-    return view('welcome', compact('articles'));
+    return view('index');
 });
 
 Route::get('/search', function (\App\Articles\ArticleRepository $repository) {
