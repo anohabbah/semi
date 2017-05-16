@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/search', function (\App\Articles\ArticleRepository $repository) {
-    $articles = $repository->search(request('q'));
+Route::get('/search', 'SearchController@search')->name('search');
 
-    return view('welcome', compact('articles'));
+Route::get('recherche', function () {
+    return view('resultat');
 });
+
+

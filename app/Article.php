@@ -30,7 +30,7 @@ class Article extends Model
 
 
     /**
-     * un article appartient à un nivau
+     * un article appartient à un niveau
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function niveau()
