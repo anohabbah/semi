@@ -34,6 +34,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/', 'DashboardController@index');
 
         Route::resource('/articles', 'ArticleController', ['except' => ['store']]);
-
+        Route::post('/articles/load', 'ArticleController@doAjaxLoading')->name('articles.ajaxendpoint');
     });
 });

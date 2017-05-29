@@ -10,9 +10,20 @@ class Article extends Model
 {
     use Searchable;
 
+    /**
+     * @inheritdoc
+     */
     protected $fillable = ['title', 'slug', 'body', 'tags', 'filiere_id', 'niveau_id', 'published_at'];
 
+    /**
+     * @inheritdoc
+     */
     protected $dates = ['published_at'];
+
+    /**
+     * @inheritdoc
+     */
+    protected $with = ['auteurs', 'attachment', 'filiere', 'niveau', 'categorie'];
 
     /**
      * @inheritdoc

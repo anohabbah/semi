@@ -142,21 +142,22 @@ $(document).ready(function () {
             toolbar2: '',
         });
     }
+    if ($('#author').length && $('#tags').length && $('#published_at').length) {
+        $('#author').tokenfield({
+            autocomplete: {
+                source: Mise.authorUrl,
+                minLength: 2,
+                delay: 100
+            },
+            showAutocompleteOnFocus: true
+        });
 
-    $('#author').tokenfield({
-        autocomplete: {
-            source: Mise.authorUrl,
-            minLength: 2,
-            delay: 100
-        },
-        showAutocompleteOnFocus: true
-    });
+        $('#tags').tokenfield();
 
-    $('#tags').tokenfield();
-
-    $('#published_at').datepicker({
-        dateFormat: 'dd/mm/yy'
-    });
+        $('#published_at').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+    }
 
     if ($('form#docs').length) {
         $('#file').on('change', function (e) {
@@ -322,13 +323,13 @@ function docReady() {
     }
 
     //datatable
-    $('.datatable').dataTable({
-        "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-12'i><'col-md-12 center-block'p>>",
-        "sPaginationType": "bootstrap",
-        "oLanguage": {
-            "sLengthMenu": "_MENU_ records per page"
-        }
-    });
+    // $('.datatable').dataTable({
+    //     "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-12'i><'col-md-12 center-block'p>>",
+    //     "sPaginationType": "bootstrap",
+    //     "oLanguage": {
+    //         "sLengthMenu": "_MENU_ records per page"
+    //     }
+    // });
     $('.btn-close').click(function (e) {
         e.preventDefault();
         $(this).parent().parent().parent().fadeOut();

@@ -23,12 +23,9 @@
                     <h2><i class="glyphicon glyphicon-edit"></i> Enregistrer un Nouveau Document</h2>
 
                     <div class="box-icon">
-                        <a href="#" class="btn btn-setting btn-round btn-default"><i
-                                    class="glyphicon glyphicon-cog"></i></a>
-                        <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                                    class="glyphicon glyphicon-chevron-up"></i></a>
-                        <a href="#" class="btn btn-close btn-round btn-default"><i
-                                    class="glyphicon glyphicon-remove"></i></a>
+                        <a href="#" class="btn btn-setting btn-round btn-default"><i class="glyphicon glyphicon-cog"></i></a>
+                        <a href="#" class="btn btn-minimize btn-round btn-default"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                        <a href="#" class="btn btn-close btn-round btn-default"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>
                 </div>
                 <div class="box-content">
@@ -92,15 +89,15 @@
                             </div>
 
                             <div class="form-group clearfix">
-                                <label for="tags" class="control-label">Filière</label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="study_1" name="study" value="1" {{ old('study', $article->filiere_id) == 1 ? 'checked' : '' }}> SI
+                                <label for="study" class="control-label">Filière</label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="study_1" name="study" value="1" {{ old('study', $article->filiere_id) == 1 ? 'checked' : '' }}> SI
                                 </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="study_2" name="study" value="2" {{ old('study', $article->filiere_id) == 2 ? 'checked' : '' }}> SM
+                                <label class="radio-inline">
+                                    <input type="radio" id="study_2" name="study" value="2" {{ old('study', $article->filiere_id) == 2 ? 'checked' : '' }}> SM
                                 </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="study_3" name="study" value="3" {{ old('study', $article->filiere_id) == 1 ? 'checked' : '' }}> SPI
+                                <label class="radio-inline">
+                                    <input type="radio" id="study_3" name="study" value="3" {{ old('study', $article->filiere_id) == 3 ? 'checked' : '' }}> SPI
                                 </label>
                             </div>
                         </div>

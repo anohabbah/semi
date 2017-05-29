@@ -14,13 +14,13 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->string('tags');
+            $table->increments('id');
             $table->unsignedInteger('niveau_id')->nullable();
             $table->unsignedInteger('filiere_id')->nullable();
-            $table->increments('id');
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->text('body');
+            $table->string('tags');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

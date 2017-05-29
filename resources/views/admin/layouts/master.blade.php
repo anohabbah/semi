@@ -9,7 +9,6 @@
 
     <!-- The styles -->
     <link id="bs-css" href="{{ asset('css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/charisma-app.css') }}" rel="stylesheet">
     <link href='{{ asset('bower_components/fullcalendar/dist/fullcalendar.css') }}' rel='stylesheet'>
     <link href='{{ asset('bower_components/fullcalendar/dist/fullcalendar.print.css') }}' rel='stylesheet' media='print'>
     <link href='{{ asset('bower_components/chosen/chosen.min.css') }}' rel='stylesheet'>
@@ -23,6 +22,7 @@
     <link href='{{ asset('css/jquery.iphone.toggle.css') }}' rel='stylesheet'>
     <link href='{{ asset('css/uploadify.css') }}' rel='stylesheet'>
     <link href='{{ asset('css/animate.min.css') }}' rel='stylesheet'>
+    <link href="{{ asset('css/charisma-app.css') }}" rel="stylesheet">
     @stack('styles')
 
     <!-- jQuery -->
