@@ -17,12 +17,16 @@ class CreateArticlesTable extends Migration
             $table->string('tags');
             $table->unsignedInteger('niveau_id')->nullable();
             $table->unsignedInteger('filiere_id')->nullable();
+            $table->unsignedInteger('categorie_id')->nullable();
             $table->increments('id');
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->text('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
+            $table->foreign('niveau_id')->references('id')->on('niveaus')->onDelete('cascade');
+            $table->foreign('filiere_id')->references('id')->on('filieres')->onDelete('cascade');
+            $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
         Schema::create('article_auteur', function (Blueprint $table) {
