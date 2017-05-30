@@ -12,7 +12,7 @@ class NiveausTableSeeder extends Seeder
     public function run()
     {
         $academicLevel = [
-            'Sciences Informatiques', 'Sciences Mathématiques', 'Sciences pour l\'Ingénieur'
+            'Licence', 'Master', 'Doctorat'
         ];
         collect($academicLevel)->each(function ($level) {
             \App\Niveau::create(['name' => $level]);
