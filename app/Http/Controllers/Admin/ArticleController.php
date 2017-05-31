@@ -87,11 +87,11 @@ class ArticleController extends Controller
 
         // SQL server connection information
         $sql_details = array(
-            'driver' => 'sqlite',
-            'user' => '',
-            'pass' => '',
-            'db' => '',
-            'host' => ''
+            'driver' => env('DB_CONNECTION'),
+            'user' => env('DB_HOST'),
+            'pass' => env('DB_PASSWORD'),
+            'db' => env('DB_DATABASE'),
+            'host' => env('DB_HOST')
         );
 
         $whereAll = 'title is not null and slug is not null';
