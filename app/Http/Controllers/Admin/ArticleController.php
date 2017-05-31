@@ -88,7 +88,7 @@ class ArticleController extends Controller
         // SQL server connection information
         $sql_details = array(
             'driver' => env('DB_CONNECTION'),
-            'user' => env('DB_HOST'),
+            'user' => env('DB_USERNAME'),
             'pass' => env('DB_PASSWORD'),
             'db' => env('DB_DATABASE'),
             'host' => env('DB_HOST')

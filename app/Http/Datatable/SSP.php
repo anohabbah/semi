@@ -372,11 +372,11 @@ class SSP
                 PDO::ATTR_EMULATE_PREPARES => false,
             ];
 
-            if (isset($sql_details['driver']) && $sql_details['driver'] === 'sqlite') {dd('sqlite');
+            if (isset($sql_details['driver']) && $sql_details['driver'] === 'sqlite') {
                 $path = realpath(config('database.connections.sqlite.database'));
 
                 $db = @new PDO("sqlite:{$path}", '', '', $options);
-            } else {dd('mysql');
+            } else {
                 $db = @new PDO(
                     "mysql:host={$sql_details['host']};dbname={$sql_details['db']}",
                     $sql_details['user'],
