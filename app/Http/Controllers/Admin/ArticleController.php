@@ -64,7 +64,7 @@ class ArticleController extends Controller
                 'dt' => 'name',
                 'formatter' => function ($d, $row) {
                     $doc = Article::find($d);
-                    return $doc->auteurs->first()->name;
+                    return $doc->auteurs->implode('name', ',');
                 }
             ),
             array('db' => 'title', 'dt' => 'title'),
@@ -81,6 +81,23 @@ class ArticleController extends Controller
                 'dt' => 'published_at',
                 'formatter' => function ($d, $row) {
                     return date('d/m/Y', strtotime($d));
+                }
+            ),
+            array(
+                'db' => 'id',
+                'dt' => 'actions',
+                'formatter' => function ($d, $row) {
+                    $id = 'delete_form_' . $d;
+                    return '<div class="btn-group btn-group-xs" >
+                              <a href="' . route("articles.edit", $d) . '" class="btn btn-default" data-toggle="tooltip" data-placement="top" type="button" title="Modifier"><i class="glyphicon glyphicon-edit"></i></a >
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropmenu_'. $d .'" data-toggle="dropdown">
+                                  <i class="caret"></i>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropmenu_'. $d .'">
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="event.preventDefault();document.getElementById(\''. $id .'\').submit()"><i class="glyphicon glyphicon-trash"></i> Supprimer</a></li>
+                                  <form action="'. route("articles.destroy", $d) .'" id="' . $id . '" method="post">'. csrf_field() . method_field("delete") .'</form>
+                                </ul>
+                            </div >';
                 }
             ),
         );
@@ -115,8 +132,9 @@ class ArticleController extends Controller
     public function create()
     {
         $article = Article::draft();
+        $action = 'create';
 
-        return view('admin.controllers.article.edit', compact('article'));
+        return view('admin.controllers.article.edit', compact('article', 'action'));
     }
 
     /**
@@ -131,11 +149,14 @@ class ArticleController extends Controller
         $title = $request->get('title');
         $authors = $request->get('authors');
 
-        $exists = Article::whereSlug(str_slug($title))->first();
-        if ($exists) {
-            return redirect()->back()
-                ->withInput($request->all())
-                ->withErrors(['title' => 'Un document de thème identique exist déjà.']);
+        //  Nous ne verifions pas si l'article existe lors d'une mise à jour.
+        if ($request->has('action') && $request->get('action') === 'create') {
+            $exists = Article::whereSlug(str_slug($title))->first();
+            if ($exists) {
+                return redirect()->back()
+                    ->withInput($request->all())
+                    ->withErrors(['title' => 'Un document de thème identique exist déjà.']);
+            }
         }
 
         $data = $this->retrieveRequestData($request);
@@ -162,5 +183,23 @@ class ArticleController extends Controller
                 'published_at' => Carbon::createFromFormat('d/m/Y', $request->get('published_at')),
                 'slug' => str_slug($request->get('title')),
             ]);
+    }
+
+    /**
+     * Display edit form.
+     *
+     * @param Article $article
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(Article $article)
+    {
+        $action = 'edit';
+
+        return view('admin.controllers.article.edit', compact('article', 'action'));
+    }
+
+    public function destroy(Article $article)
+    {
+        $article->delete();
     }
 }

@@ -32,6 +32,7 @@
                     <form id="docs" role="form" method="post" action="{{ route('articles.update', $article) }}" enctype="multipart/form-data" class="clearfix">
                         {{ csrf_field() }}
                         {{ method_field('patch') }}
+                        {{ action_field($action) }}
 
                         <div class="col-lg-6 clearfix">
                             <div class="form-group clearfix{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -74,7 +75,7 @@
                             <div class="form-group clearfix{{ $errors->has('authors') ? ' has-error' : '' }}">
                                 <label for="author" class="control-label">Les Auteurs <span>*</span></label>
                                 <input type="text" name="authors" class="form-control" id="author"
-                                       value="{{ old('authors', $article->author) }}" required />
+                                       value="{{ old('authors', $article->auteurs->implode('name', ',')) }}" required />
                                 <span class="help-block">Terminer chaque Nom d'auteur par une virgule (,)</span>
 
                                 {!! $errors->first('authors', '<span class="help-block">:message</span>') !!}

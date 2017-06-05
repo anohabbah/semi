@@ -35,6 +35,8 @@ class Article extends Model
         static::deleting(function ($item) {
             $item->attachment->deleteFile();
             $item->attachment()->delete();
+
+            $item->auteurs()->sync([]);
         });
     }
 

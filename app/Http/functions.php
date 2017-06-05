@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\HtmlString;
 
 /**
  * Supprime le prefix de "attachable_type".
@@ -13,4 +14,11 @@
  */
 function normalizeDir(string $dir) {
     return strtolower(substr($dir, 4));
+}
+
+if (! function_exists('action_field')) {
+    function action_field(string $type)
+    {
+        return new HtmlString('<input type="hidden" name="action" value="'. $type .'">');
+    }
 }

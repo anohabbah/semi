@@ -32,9 +32,10 @@
                         <thead>
                         <tr>
                             <th width="15%">Auteur</th>
-                            <th width="65%">Thème</th>
+                            <th width="55%">Thème</th>
                             <th width="10%">Filière</th>
                             <th width="10%">Publié le</th>
+                            <th width="10%">Actions</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -42,7 +43,8 @@
                             <th>Auteur</th>
                             <th>Thème</th>
                             <th>Filière</th>
-                            <th>Date de Publication</th>
+                            <th>Publié le</th>
+                            <th>Actions</th>
                         </tr>
                         </tfoot>
                     </table>
@@ -76,7 +78,8 @@
                     { "data": "name", "searchable": false },
                     { "data": "title" },
                     { "data": "study", "searchable": false },
-                    { "data": "published_at" }
+                    { "data": "published_at" },
+                    { "data": "actions", "searchable": false, "orderable": false }
                 ],
                 "order": [[0,'desc']]
             });
