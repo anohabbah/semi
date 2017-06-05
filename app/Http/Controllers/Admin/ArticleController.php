@@ -49,7 +49,7 @@ class ArticleController extends Controller
          */
 
         // DB table to use
-        $table = 'articles';
+        $table = env('DB_PREFIX', '') . 'articles';
 
         // Table's primary key
         $primaryKey = 'id';
@@ -144,7 +144,6 @@ class ArticleController extends Controller
         $article->saveAuthors($authors);
 
         if ($request->has('study')) {
-            dd("ici");
             $article->update(['filiere_id' => $request->get('study')]);
         }
 

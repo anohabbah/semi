@@ -10,28 +10,47 @@ $(document).ready(function () {
         $('.attente').show();
         document.getElementById("search").focus();
     });
-
-    $('#search').on('keyup', function (e) {
-        doAjaxQuery();
-    });
-
-    function doAjaxQuery() {
-        $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            url: Semi.url,
-            data: {
-                _token: Semi.csrfToken,
-                query: $('#search').val()
-            },
-            success: function (response) {
-
-            },
-            error: function (error) {
-
-            }
-        });
-    }
 });
 
+
+$(document).ready(function () {
+    $('.attente').find('form').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'get',
+            sync: true,
+            dataType: 'json',
+            data: {
+                query: $('input[name="query"]').val(),
+                field: $('input[name="field"]:checked').val()
+            },
+            headers: {
+                'X-CSRF-TOKEN': Semi.csrfToken
+            },
+            url: this.action,
+            success: function (res) {
+                displayResults(res);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+});
+
+function displayResults(res) {
+    var str = '<div class="container"><div class="row"></div><div class="panel panel-primary"><div class="panel-heading"><h4>Resultats</h4></div><div class="panel-body">';
+    for (var i in res) {
+        var article = res[i];
+        str +=  '<article>' +
+                    '<h2><a href="#">'+ article.title + '</a></h2>' +
+                        article.body +
+                        '<p class="well">' + article.auteurs[0].name + '</p>' +
+                '</article>';
+    }
+
+    str += '</div></div></div></div>';
+
+    $('body').append(str);
+}
