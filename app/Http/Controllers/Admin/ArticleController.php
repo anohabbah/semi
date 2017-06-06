@@ -19,7 +19,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('admin.controllers.article.index');
+        $articles = Article::notDraft()->get();
+
+        return view('admin.controllers.article.index', compact('articles'));
     }
 
     /**

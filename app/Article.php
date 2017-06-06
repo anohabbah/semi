@@ -94,6 +94,11 @@ class Article extends Model
         ]);
     }
 
+    public function scopeNotDraft($builder)
+    {
+        return $builder->whereNotNull('title')->whereNotNull('slug')->latest();
+    }
+
     /**
      * Enregistre les auteurs associés à au document.
      *

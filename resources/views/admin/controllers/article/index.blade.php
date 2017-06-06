@@ -27,22 +27,50 @@
                     </div>
                 </div>
                 <div class="box-content">
-                    <table id="docs_table" data-url="{{ route('articles.ajaxendpoint') }}"
+                    <table id="docs" data-url="{{ route('articles.ajaxendpoint') }}"
                            class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                         <thead>
                         <tr>
                             <th width="15%">Auteur</th>
-                            <th width="55%">Thème</th>
-                            <th width="10%">Filière</th>
-                            <th width="10%">Publié le</th>
-                            <th width="10%">Actions</th>
+                            <th width="53%">Thème</th>
+                            <th width="8%">Filière</th>
+                            <th width="8%">Niveau</th>
+                            <th width="8%">Publié le</th>
+                            <th width="8%">Actions</th>
                         </tr>
                         </thead>
+                        @forelse($articles as $article)
+                            <tr>
+                                <td>{{ $article->auteurs->implode('name', '; ') }}</td>
+                                <td>{{ $article->title }}</td>
+                                <td>{{ $article->filiere->name }}</td>
+                                <td>{{ $article->niveau->name }}</td>
+                                <td>{{ $article->published_at->format('d M Y') }}</td>
+                                <td class="text-right">
+                                    <div class="btn-group btn-group-xs" >
+                                        <a href="{{ route('articles.edit', $article) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" type="button" title="Modifier"><i class="glyphicon glyphicon-edit"></i></a >
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropmenu_{{ $article->id }}" data-toggle="dropdown">
+                                            <i class="caret"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropmenu_{{ $article->id }}">
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="event.preventDefault();document.getElementById('delete_form_{{ $article->id }}').submit()"><i class="glyphicon glyphicon-trash"></i> Supprimer</a></li>
+                                        </ul>
+                                        <form action="{{ route('articles.edit', $article) }}" id="delete_form_{{ $article->id }}" method="post" style="display: none;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('delete') }}
+                                        </form>
+                                    </div >
+                                </td>
+                            </tr>
+                        @empty
+                            <tr><td colspan="6">No data in the table</td></tr>
+                        @endforelse
                         <tfoot>
                         <tr>
                             <th>Auteur</th>
                             <th>Thème</th>
                             <th>Filière</th>
+                            <th>Niveau</th>
                             <th>Publié le</th>
                             <th>Actions</th>
                         </tr>
